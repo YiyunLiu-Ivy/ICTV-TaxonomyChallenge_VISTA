@@ -1,1 +1,0 @@
-# ICTV-TaxonomyChallenge_VISTA
