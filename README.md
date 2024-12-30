@@ -28,6 +28,10 @@ git clone https://github.com/YiyunLiu-Ivy/ICTV-TaxonomyChallenge_VISTA.git
 
 Contributions are welcome! Please create a pull request with your proposed changes.
 
-## References:
+## References
 - VISTA Paper: https://doi.org/10.1093/gpbjnl/qzae082
+        
+        
+        
+        
 - ICTV Taxonomy Challenge: https://ictv-vbeg.github.io/ICTV-TaxonomyChallenge/
