@@ -19,24 +19,24 @@ docker exec -it [container id] bash
 
 # Pipeline Steps
 ## Step 1: Run BLAST
-Run the provided Pipeline_scripts\BLAST.sh script to run the ICTV-Taxonomy Challenge dataset to determine the families where the query sequences belong to.  
+Run the provided Pipeline_scripts/BLAST.sh script to run the ICTV-Taxonomy Challenge dataset to determine the families where the query sequences belong to.  
 This script outputs tab-separated files like the example listed below for further analysis.  
 | QueryID | SubjectID | SubjectTitle | Identity | MatchLen | Qlen | Slen | Staxid |  
 | --- | --- | --- | --- | --- | --- | --- | --- |  
 | ICTVTaxoChallenge_100097 | gi\|1841996460\|ref\|NC_047744.1 | Bacillus phage Bp8p-T, complete genome | 100 | 148391 | 148391 | 151419 | 1445811 |
 
 ## Step 2: Filter Results
-1. Convert BLAST results from .txt to .csv format using the Pipeline_scripts\BLAST_txt_to_csv.py script.
+1. Convert BLAST results from .txt to .csv format using the Pipeline_scripts/BLAST_txt_to_csv.py script.
 2. Filter query sequences where the alignment length is at least 80% of the subject sequence length and the subject sequence represents to be a complete genome. This filtration step is completed by the help of Microsoft Excel.
 
 ## Step 3: Extract Taxonomy Information (Family level)
-Extract taxonomy information using Pipeline_scripts\Get_family_name.py to associate each subject sequence taxid with its corresponding family or class. Merge this information with BLAST results using Excel or equivalent tools (e.g., vlookup function).
+Extract taxonomy information using Pipeline_scripts/Get_family_name.py to associate each subject sequence taxid with its corresponding family or class. Merge this information with BLAST results using Excel or equivalent tools (e.g., vlookup function).
 
 ## Step 4: Selection of Query Sequences with Family Taxonomy within VISTA Database
-This step runs the script Pipeline_scripts\Classify_fasta.sh and Pipeline_scripts\38viridae.sh, to select query sequences in the original dataset based on their family/Class taxonomy as supported by the VISTA database. It includes identifying organizing them into appropriate directories, and consolidating them for downstream analysis. Sequences belonging to families not supported by the database or failing to meet quality criteria are excluded. This ensures that only relevant sequences are prepared for the subsequent VISTA processing steps.
+This step runs the script Pipeline_scripts/Classify_fasta.sh and Pipeline_scripts/38viridae.sh, to select query sequences in the original dataset based on their family/Class taxonomy as supported by the VISTA database. It includes identifying organizing them into appropriate directories, and consolidating them for downstream analysis. Sequences belonging to families not supported by the database or failing to meet quality criteria are excluded. This ensures that only relevant sequences are prepared for the subsequent VISTA processing steps.
 
 ## Step 5: Prepare Input for VISTA
-Merge sequences by family into single FASTA files using Pipeline_scripts\Merge_fasta.sh. For large datasets (e.g., Caudoviricetes), split into smaller batches with Pipeline_scripts\Split_fasta.sh to prevent system overload.
+Merge sequences by family into single FASTA files using Pipeline_scripts/Merge_fasta.sh. For large datasets (e.g., Caudoviricetes), split into smaller batches with Pipeline_scripts/Split_fasta.sh to prevent system overload.
 
 ## Step 6: Run VISTA
 Run VISTA for the prepared sequences using the provided scripts.
@@ -50,7 +50,7 @@ bash VISTA_Caudo.sh
 ```
 
 ## Step 7: Consolidate VISTA Results
-This step involves consolidating all VISTA output files into a single CSV file for further analysis. Our script Pipeline_scripts\VISTA_txt_to_csv.py iterates through each family directory, extracts the results from distance_file_min.txt files, which contains the top 1 match of each query sequence, and appends them into a unified CSV file, which can be obtained in the Results\Distance_file.csv. This merged file provides a comprehensive view of the VISTA assignment results for all 38 families and Caudoviricetes. The table below is an explanation of VISTA output fields:
+This step involves consolidating all VISTA output files into a single CSV file for further analysis. Our script Pipeline_scripts/VISTA_txt_to_csv.py iterates through each family directory, extracts the results from distance_file_min.txt files, which contains the top 1 match of each query sequence, and appends them into a unified CSV file, which can be obtained in the Results/Distance_file.csv. This merged file provides a comprehensive view of the VISTA assignment results for all 38 families and Caudoviricetes. The table below is an explanation of VISTA output fields:
 |Field Name|Description|
 |---|---|
 |Query_ID|Unique identifier for the user-provided query sequence.|
@@ -80,7 +80,7 @@ This step fills the ICTV-Challenge classification template based on the Assignme
    Score = 1 - Distance
    ```
 ## Step 9: Standardize Species Column with Binomial Nomenclature
-To ensure compliance with ICTV standards, the species column in the classification template is standardized using the binomial nomenclature. Run the Pipeline_scripts\Binomial_Species_name_update.py script to map the latest species nomenclature in VMR_MSL39(Datasets\VMR_MSL39.v4_20241106.csv) with the classification table. Further more, species that are not updated in VMR is looked up manually in the https://ictv.global/taxonomy/find_the_species tool.
+To ensure compliance with ICTV standards, the species column in the classification template is standardized using the binomial nomenclature. Run the Pipeline_scripts/Binomial_Species_name_update.py script to map the latest species nomenclature in VMR_MSL39(Datasets/VMR_MSL39.v4_20241106.csv) with the classification table. Further more, species that are not updated in VMR is looked up manually in the https://ictv.global/taxonomy/find_the_species tool.
 
 # Troubleshooting
 - Verify input file formats or paths if errors occur.

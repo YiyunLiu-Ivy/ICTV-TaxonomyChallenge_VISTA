@@ -15,7 +15,7 @@ We have screened out 38 viral families and Caudoviricetes with the completeness 
 ```shell
 git clone https://github.com/YiyunLiu-Ivy/ICTV-TaxonomyChallenge_VISTA.git
 ```
-2. Install dependencies as outlined in the Documentation\Pipeline_instructions.md 
+1. Install dependencies as outlined in the Pipeline_instructions.md 
 
 ## Usage
 1. Prepare input sequences in FASTA format
