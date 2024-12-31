@@ -50,7 +50,7 @@ bash VISTA_Caudo.sh
 ```
 
 ## Step 7: Consolidate VISTA Results
-This step involves consolidating all VISTA output files into a single CSV file for further analysis. Our script Pipeline_scripts/VISTA_txt_to_csv.py iterates through each family directory, extracts the results from distance_file_min.txt files, which contains the top 1 match of each query sequence, and appends them into a unified CSV file, which can be obtained in the Results/Distance_file.csv. This merged file provides a comprehensive view of the VISTA assignment results for all 38 families and Caudoviricetes. The table below is an explanation of VISTA output fields:
+This step involves consolidating all VISTA output files into a single CSV file for further analysis. Our script Pipeline_scripts/VISTA_txt_to_csv.py iterates through each family directory, extracts the results from distance_file_min.txt files, which contains the top 1 match of each query sequence, and appends them into a unified CSV file, which can be obtained in the Results/Combined_distance_vista.csv. This merged file provides a comprehensive view of the VISTA assignment results for all 38 families and Caudoviricetes. The table below is an explanation of VISTA output fields:
 |Field Name|Description|
 |---|---|
 |Query_ID|Unique identifier for the user-provided query sequence.|
@@ -80,7 +80,7 @@ This step fills the ICTV-Challenge classification template based on the Assignme
    Score = 1 - Distance
    ```
 ## Step 9: Standardize Species Column with Binomial Nomenclature
-To ensure compliance with ICTV standards, the species column in the classification template is standardized using the binomial nomenclature. Run the Pipeline_scripts/Binomial_Species_name_update.py script to map the latest species nomenclature in VMR_MSL39(Datasets/VMR_MSL39.v4_20241106.csv) with the classification table. Further more, species that are not updated in VMR is looked up manually in the https://ictv.global/taxonomy/find_the_species tool.
+To ensure compliance with ICTV standards, the species column in the classification template is standardized using the binomial nomenclature. Run the Pipeline_scripts/Binomial_Species_name_update.py script to map the latest species nomenclature in VMR_MSL39(Datasets/VMR_MSL39.v4_20241106.csv) with the classification table. Further more, species that are not updated in VMR is looked up manually in the https://ictv.global/taxonomy/find_the_species tool. The final result which is in the form of ICTV-Challenge classification template is Results/Classification_Template_VISTA.csv.
 
 # Troubleshooting
 - Verify input file formats or paths if errors occur.
