@@ -1,22 +1,12 @@
 #!/bin/bash
-
-input_folder="/root/VISTA/ICTV_challenge/B_Families"
-output_folder="/root/VISTA/ICTV_challenge/B_Output"
-
-mkdir -p $output_folder
-
-for fasta_file in $(ls $input_folder/*.fasta | sort -r)
-do
-    filename=$(basename -- "$fasta_file")
-    
-    virus_family="${filename%.*}"
-    if [ "$virus_family" == "Orthoherpesviridae" ]; then
-        virus_family="Herpesviridae"
-    fi
-
-    echo "Running VISTA on $fasta_file with virus family: $virus_family"
-
-    VISTA.sh -i $fasta_file -f $virus_family -o $output_folder/$virus_family -t 8
+for fam in $Your_family_path/*; do 
+    family_name=$(basename "$fam"); 
+    mkdir -p Run_2/$family_name; 
+    for f in "$fam"/*.fasta; do 
+        [ -f "$f" ] || continue
+        fname=$(basename "$f" .fasta); 
+        echo "Processing $family_name / $fname ..."
+        mkdir -p Run_2/$family_name/$fname
+        bash /root/VISTA/Scripts/VISTA.sh -i "$f" -f "$family_name" -o "$Your_desired_output_path/$family_name/$fname"
+    done
 done
-
-echo "All .fasta files have been processed. Results saved in $output_folder"
