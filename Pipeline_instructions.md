@@ -36,7 +36,7 @@ Extract taxonomy information using Pipeline_scripts/Get_family_name.py to associ
 This step runs the script Pipeline_scripts/Classify_fasta.sh and Pipeline_scripts/38viridae.sh, to select query sequences in the original dataset based on their family/Class taxonomy as supported by the VISTA database. It includes identifying organizing them into appropriate directories, and consolidating them for downstream analysis. Sequences belonging to families not supported by the database or failing to meet quality criteria are excluded. This ensures that only relevant sequences are prepared for the subsequent VISTA processing steps.
 
 ## Step 5: Prepare Input for VISTA
-Merge sequences by family into single FASTA files using Pipeline_scripts/Merge_fasta.sh. For large datasets (e.g., Caudoviricetes), split into smaller batches with Pipeline_scripts/Split_fasta.sh to prevent system overload.
+For large datasets (e.g., Caudoviricetes), split into smaller batches with Pipeline_scripts/Split_fasta.sh to prevent system overload.
 
 ## Step 6: Run VISTA
 Run VISTA for the prepared sequences using the provided scripts.
@@ -50,7 +50,7 @@ bash VISTA_Caudo.sh
 ```
 
 ## Step 7: Consolidate VISTA Results
-This step involves consolidating all VISTA output files into a single CSV file for further analysis. Our script Pipeline_scripts/VISTA_txt_to_csv.py iterates through each family directory, extracts the results from distance_file_min.txt files, which contains the top 1 match of each query sequence, and appends them into a unified CSV file, which can be obtained in the Results/Combined_distance_vista.csv. This merged file provides a comprehensive view of the VISTA assignment results for all 38 families and Caudoviricetes. The table below is an explanation of VISTA output fields:
+This step involves consolidating all VISTA output files into a single CSV file for further analysis. Please run Extract_min_distance.sh which iterates through each family directory, extracts the results from distance_file_min.txt files, which contains the top 1 match of each query sequence, and appends them into a unified CSV file, which can be obtained in the Results/Combined_distance_vista.csv. This merged file provides a comprehensive view of the VISTA assignment results for all 38 families and Caudoviricetes. The table below is an explanation of VISTA output fields:
 |Field Name|Description|
 |---|---|
 |Query_ID|Unique identifier for the user-provided query sequence.|
