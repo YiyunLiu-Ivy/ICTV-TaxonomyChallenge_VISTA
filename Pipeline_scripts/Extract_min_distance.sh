@@ -25,4 +25,4 @@ for family in "$BASE_DIR"/*; do
     fi
 done
 
-echo "Done! 输出文件保存在: $BASE_DIR/*.txt"
+    echo "Done! The concatenated output folder saved at: $BASE_DIR/*.txt"
