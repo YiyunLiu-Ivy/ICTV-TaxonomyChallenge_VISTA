@@ -29,9 +29,16 @@ Clone this repository to your local machine or HPC environment. This will downlo
 git clone https://github.com/YiyunLiu-Ivy/ICTV-TaxonomyChallenge_VISTA.git
 cd ICTV-TaxonomyChallenge_VISTA
 ```
+
+2. Download the Singularity Image
+The image file is hosted on GitHub Releases. Please download it into the repository directory using wget or curl.
+```shell
+# Download the image from GitHub Releases (v2026.01)
+wget https://github.com/YiyunLiu-Ivy/ICTV-TaxonomyChallenge_VISTA/releases/download/v2026.01/vista_final.sif
+```
 *Note: The vista_final.sif image has been modified to store VISTA scripts and environments in /opt, ensuring compatibility with non-root user execution on HPC systems.*
 
-2. Verify the Image (Optional)
+3. Verify the Image (Optional)
 
 You can verify the image is working by checking the help message. Ensure you are in the repository root directory where the .sif file is located:
 ```shell
