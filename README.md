@@ -63,22 +63,31 @@ Extract taxonomy information using Pipeline_scripts/Get_family_name.py to associ
 ### Step 4: Selection of Query Sequences
 Run Pipeline_scripts/Classify_fasta.sh and Pipeline_scripts/38viridae.sh to organize query sequences into appropriate directories based on their family/Class taxonomy supported by the VISTA database. Sequences belonging to unsupported families or failing quality criteria are excluded.
 
-### Step 5: Prepare Input for VISTA
-For large datasets (e.g., Caudoviricetes), split sequences into smaller batches using Pipeline_scripts/Split_fasta.sh to prevent system overload during processing.
+### Step 5:Run VISTA (Using Singularity)
+We provide batch processing scripts that accept command-line arguments for flexible execution.
+ 
+#### For general families (38 families):
+ 
+`VISTA_ALL.sh` iterates over family subdirectories and processes each `.fasta` file individually.
+ 
+```shell
+# Make sure your base directory is the ICTV-TaxonomyChallenge_VISTA folder
 
-### Step 6:Run VISTA (Using Singularity)
-We provide batch processing scripts to execute the VISTA pipeline for all prepared families using the vista_final.sif image.
-#### Usage:
-Run the following scripts from the repository root directory. These scripts loop through your input directories and invoke the Singularity container for each dataset.
-- **For general families (38 families):**
-  ```shell
-  bash Pipeline_scripts/VISTA_ALL.sh
-  ```
-- **For *Caudoviricetes*:**
-  ```shell
-  bash Pipeline_scripts/VISTA_Caudo.sh
-  ```
-*Note: Ensure that vista_final.sif is present in the current directory (or update the path in the scripts).*
+bash Pipeline_scripts/VISTA_ALL.sh \
+    -i /path/to/38viridae \
+    -s /path/to/vista_final.sif \
+    -o Output/ \
+    -t 8
+```
+ 
+| Argument | Description |
+| --- | --- |
+| `-i` | Input folder containing individual `.fasta` files |
+| `-s` | Path to the VISTA Singularity image (`.sif`) |
+| `-o` | Output directory (default: `Output`) |
+| `-t` | Number of threads (default: `8`) |
+ 
+> **Note:** Each query sequence should be in a separate `.fasta` file. Do **not** concatenate all sequences into a single file, as this will cause VISTA to compute pairwise distances for all sequences against every reference, leading to excessive runtime.
 
 ### Step 7: Consolidate VISTA Results
 Consolidate all VISTA output files into a single CSV file. Run Extract_min_distance.sh, which iterates through family directories, extracts the top 1 match (from distance_file_min.txt), and appends them to Results/Combined_distance_vista.csv. This merged file provides a comprehensive view of the VISTA assignment results for all 38 families and Caudoviricetes. The table below is an explanation of VISTA output fields:
